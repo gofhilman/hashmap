@@ -5,9 +5,8 @@ class LinkedList {
         this.head = null;
     }
 
-    append(value) {
-        const lastNode = new Node();
-        lastNode.value = value;
+    append(key, value) {
+        const lastNode = new Node(key, value);
         if(!this.head) {
             this.head = lastNode;
         } else {
@@ -17,9 +16,8 @@ class LinkedList {
         }
     }
 
-    prepend(value) {
-        const firstNode = new Node();
-        firstNode.value = value;
+    prepend(key, value) {
+        const firstNode = new Node(key, value);
         firstNode.nextNode = this.head;
         this.head = firstNode;
     }
@@ -58,36 +56,47 @@ class LinkedList {
         node.nextNode = null;
     }
 
-    contains(value) {
+    containsKey(key) {
         let node = this.head;
         while(node) {
-            if(node.value === value) return true;
+            if(key in node) return true;
             node = node.nextNode;
         }
         return false;
     }
 
-    find(value) {
+    updateValue(key, value) {
         let node = this.head;
-        let nodeIter = 0;
         while(node) {
-            if(node.value === value) return nodeIter;
+            if(key in node) {
+                node[key] = value;
+                break;
+            }
             node = node.nextNode;
-            nodeIter++;
         }
-        return null;
     }
 
-    toString() {
-        if(!this.head) return "";
-        let printedList = "";
-        let node = this.head;
-        while(node) {
-            printedList += "( " + node.value + " ) -> ";
-            node = node.nextNode;
-        }
-        return printedList += null;
-    }
+    // find(value) {
+    //     let node = this.head;
+    //     let nodeIter = 0;
+    //     while(node) {
+    //         if(node.value === value) return nodeIter;
+    //         node = node.nextNode;
+    //         nodeIter++;
+    //     }
+    //     return null;
+    // }
+
+    // toString() {
+    //     if(!this.head) return "";
+    //     let printedList = "";
+    //     let node = this.head;
+    //     while(node) {
+    //         printedList += "( " + node.value + " ) -> ";
+    //         node = node.nextNode;
+    //     }
+    //     return printedList += null;
+    // }
 }
 
 export default LinkedList;
