@@ -59,7 +59,7 @@ class LinkedList {
     containsKey(key) {
         let node = this.head;
         while(node) {
-            if(key in node) return true;
+            if(node.key === key) return true;
             node = node.nextNode;
         }
         return false;
@@ -68,35 +68,38 @@ class LinkedList {
     updateValue(key, value) {
         let node = this.head;
         while(node) {
-            if(key in node) {
-                node[key] = value;
+            if(node.key === key) {
+                node.value = value;
                 break;
             }
             node = node.nextNode;
         }
     }
 
-    // find(value) {
-    //     let node = this.head;
-    //     let nodeIter = 0;
-    //     while(node) {
-    //         if(node.value === value) return nodeIter;
-    //         node = node.nextNode;
-    //         nodeIter++;
-    //     }
-    //     return null;
-    // }
+    getValue(key) {
+        let node = this.head;
+        while(node) {
+            if(node.key === key) return node.value;
+            node = node.nextNode;
+        }
+        return null;
+    }
 
-    // toString() {
-    //     if(!this.head) return "";
-    //     let printedList = "";
-    //     let node = this.head;
-    //     while(node) {
-    //         printedList += "( " + node.value + " ) -> ";
-    //         node = node.nextNode;
-    //     }
-    //     return printedList += null;
-    // }
+    removeNode(key) {
+        let node = this.head;
+        if(node.key === key) {
+            this.head = node.nextNode;
+            return true;
+        } else {
+            while(node) {
+                if(node.nextNode.key === key) {
+                    node.nextNode = node.nextNode.nextNode;
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }
 
 export default LinkedList;
